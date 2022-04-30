@@ -5,6 +5,12 @@
  */
 package br.com.senac.util;
 
+import br.com.senac.dao.FornecedorDaoImpl;
+import br.com.senac.dao.FornecerdorDao;
+import br.com.senac.dao.HibernateUtil;
+import br.com.senac.entidade.Fornecedor;
+import org.hibernate.Session;
+
 /**
  *
  * @author vitor.kuhnen
@@ -14,6 +20,14 @@ public class CadastraFornecedor extends javax.swing.JFrame {
     /**
      * Creates new form CadastraFornecedor
      */
+    private Fornecedor fornecedor;
+    private FornecerdorDao fornecerdorDao;
+    private Session session;
+    
+    public CadastraFornecedor(){
+        fornecerdorDao = new FornecedorDaoImpl();
+    }
+    
     public CadastraFornecedor() {
         initComponents();
     }
@@ -27,35 +41,140 @@ public class CadastraFornecedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panel = new javax.swing.JPanel();
+        lbNome = new javax.swing.JLabel();
+        lbCnpj = new javax.swing.JLabel();
+        lbInscriEstadual = new javax.swing.JLabel();
+        lbEmail = new javax.swing.JLabel();
+        lbTelefone = new javax.swing.JLabel();
+        varNome = new javax.swing.JTextField();
+        varCnpj = new javax.swing.JTextField();
+        varEmail = new javax.swing.JTextField();
+        varTelefone = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        varInscriEstadual = new javax.swing.JTextArea();
+        btSalvar = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+        lbNome.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbNome.setText("Nome:");
+
+        lbCnpj.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbCnpj.setText("CNPJ:");
+
+        lbInscriEstadual.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbInscriEstadual.setText("Inscrição Estadual:");
+
+        lbEmail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbEmail.setText("E-mail:");
+
+        lbTelefone.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTelefone.setText("Telefone:");
+
+        varInscriEstadual.setColumns(20);
+        varInscriEstadual.setRows(5);
+        jScrollPane1.setViewportView(varInscriEstadual);
+
+        btSalvar.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
+
+        btCancelar.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        btCancelar.setText("Cancelar");
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbTelefone)
+                            .addComponent(lbEmail)
+                            .addComponent(lbInscriEstadual)
+                            .addComponent(lbCnpj)
+                            .addComponent(lbNome))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(varNome)
+                            .addComponent(varCnpj)
+                            .addComponent(varEmail)
+                            .addComponent(varTelefone)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btSalvar)
+                        .addGap(37, 37, 37)
+                        .addComponent(btCancelar)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                .addContainerGap(73, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNome)
+                    .addComponent(varNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCnpj)
+                    .addComponent(varCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbEmail)
+                    .addComponent(varEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbTelefone)
+                    .addComponent(varTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(lbInscriEstadual)
+                        .addGap(73, 73, 73))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btSalvar)
+                    .addComponent(btCancelar))
+                .addGap(67, 67, 67))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        fornecedor = new Fornecedor(null, geradorUtil.gerarNome(), geradorUtil.gerarCnpj(),
+                "Fornecedore autorizado pelo Governo!", geradorUtil.gerarNome() + "@gmail.com", 
+                geradorUtil.gerarNumero(11));
+        session = HibernateUtil.abrirConexao();
+        fornecerdorDao.saveOrAlter(fornecedor, session);
+        session.close();
+        assertNotNull(fornecedor.getId());
+        
+        
+    }//GEN-LAST:event_btSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,6 +212,19 @@ public class CadastraFornecedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btSalvar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbCnpj;
+    private javax.swing.JLabel lbEmail;
+    private javax.swing.JLabel lbInscriEstadual;
+    private javax.swing.JLabel lbNome;
+    private javax.swing.JLabel lbTelefone;
+    private javax.swing.JPanel panel;
+    private javax.swing.JTextField varCnpj;
+    private javax.swing.JTextField varEmail;
+    private javax.swing.JTextArea varInscriEstadual;
+    private javax.swing.JTextField varNome;
+    private javax.swing.JTextField varTelefone;
     // End of variables declaration//GEN-END:variables
 }

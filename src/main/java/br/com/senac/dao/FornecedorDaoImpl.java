@@ -6,6 +6,7 @@
 package br.com.senac.dao;
 
 import br.com.senac.entidade.Fornecedor;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -20,4 +21,8 @@ public class FornecedorDaoImpl extends BaseDaoImpl<Fornecedor, Long> implements 
         return sessao.get(Fornecedor.class, id);
     }
     
+    @Override
+    public List<Fornecedor> pesquisarPorNome (String nome, Session session) throws HibernateException{
+        
+    }
 }

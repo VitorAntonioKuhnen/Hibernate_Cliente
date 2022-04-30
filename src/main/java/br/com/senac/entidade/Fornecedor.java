@@ -6,6 +6,7 @@
 package br.com.senac.entidade;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -48,4 +49,7 @@ public class Fornecedor implements Serializable {
     
     @Column (nullable = false, length = 11)
     private String telefone;
+    
+    @OneToMany(mappedBy = "fornecedor")
+    private List<Produto> produtos;
 }
