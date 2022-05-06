@@ -21,7 +21,7 @@ import org.junit.Test;
 public class FornecedorDaoImplTeste {
 
     private Fornecedor fornecedor;
-    private FornecerdorDao fornecerdorDao;
+    private FornecedorDao fornecerdorDao;
     private Session session;
     private GeradorUtil geradorUtil;
 
@@ -72,6 +72,9 @@ public class FornecedorDaoImplTeste {
         }
         return fornecedor;
     }
+    
+    
+    
 //    @Test
     public void testAskPerId(){
         System.out.println("Pesquisar por ID");
@@ -79,6 +82,26 @@ public class FornecedorDaoImplTeste {
         fornecedor = session.find(Fornecedor.class, Long.valueOf(""));
         session.close();
         System.out.println(fornecedor.getNome() + "\n" + fornecedor.getEmail() + "\n" + fornecedor.getCnpj());
+    }
+    
+    //    @Test
+    public void testPesquisarPorNome() {
+        System.out.println("pesquisarPorNome");
+    }
+    
+    public Fornecedor fornecedorDB(){
+        //SELECT * FROM fornecedor;
+        String hql = "FROM Fornecedor f";
+        session = HibernateUtil.abrirConexao();
+        Query<Fornecedor> consulta = session.createQuery(hql);
+        List<Fornecedor> fornecedores = consulta.getResultList();
+        session.close();
+        if(fornecedores.isEmpty()){
+            testSave();
+        }else{
+            fornecedor = fornecedores.get(0);
+        }        
+        return fornecedor;
     }
     
 }

@@ -6,10 +6,10 @@
 package br.com.senac.util;
 
 import br.com.senac.dao.FornecedorDaoImpl;
-import br.com.senac.dao.FornecerdorDao;
 import br.com.senac.dao.HibernateUtil;
 import br.com.senac.entidade.Fornecedor;
 import org.hibernate.Session;
+import br.com.senac.dao.FornecedorDao;
 
 /**
  *
@@ -21,7 +21,7 @@ public class CadastraFornecedor extends javax.swing.JFrame {
      * Creates new form CadastraFornecedor
      */
     private Fornecedor fornecedor;
-    private FornecerdorDao fornecerdorDao;
+    private FornecedorDao fornecerdorDao;
     private Session session;
     
     public CadastraFornecedor(){

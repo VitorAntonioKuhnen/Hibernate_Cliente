@@ -28,7 +28,7 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "fkfornecedor", nullable = false)
     private Fornecedor fornecedor;
 

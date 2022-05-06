@@ -6,11 +6,14 @@
 package br.com.senac.dao;
 
 import br.com.senac.entidade.Fornecedor;
+import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 /**
  *
  * @author vitor.kuhnen
  */
-public interface FornecerdorDao extends BaseDao<Fornecedor, Long>{
-    
+public interface FornecedorDao extends BaseDao<Fornecedor, Long>{
+    List<Fornecedor> askPerName(String nome, Session session) throws HibernateException;
 }
